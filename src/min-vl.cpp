@@ -73,7 +73,7 @@ std::vector<double> get_vl_ascending_distance(
 //' of :euclidean, :taxicab, and :infinity.
 //' @export
 // [[Rcpp::export]]
-double get_vl_set_distance(
+double vl_dist(
     std::vector<double> s1,
     std::vector<double> s2,
     String elt_type,
@@ -279,10 +279,10 @@ std::vector<std::vector<double> > extract_minimal_vl(
 //' @param norm Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}. Each of these identify different norms.
 //' @return A list of three values: 1) the size of the minimal voice-leading; 2) the start voicing; 3) the end voicing.
 //' @references
-//' \insertRef{Tymoczko2006}{vldist}
+//' \insertRef{Tymoczko2006}{minVL}
 //' @export
 // [[Rcpp::export]]
-List get_minimal_voice_leading(
+List min_vl(
   NumericVector s1,
   NumericVector s2,
   String elt_type = "pc",
@@ -377,6 +377,6 @@ List get_minimal_voice_leading(
     reverse? min_vl[1] : min_vl[0],
     reverse? min_vl[0] : min_vl[1]
   );
-  res.names() = CharacterVector::create("size", "start", "end");
+  res.names() = CharacterVector::create("dist", "start", "end");
   return res;
 }

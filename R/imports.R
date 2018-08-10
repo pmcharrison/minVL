@@ -1,3 +1,3 @@
-#' @useDynLib vldist
+#' @useDynLib minVL
 #' @importFrom Rcpp sourceCpp
 NULL

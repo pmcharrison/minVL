@@ -2,7 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 mod <- function(x, base) {
-    .Call('_vldist_mod', PACKAGE = 'vldist', x, base)
+    .Call('_minVL_mod', PACKAGE = 'minVL', x, base)
 }
 
 #' Get voice-leading element distance
@@ -14,7 +14,7 @@ mod <- function(x, base) {
 #' "pitch", in which cases distance is computed
 #' between two pitches.
 get_vl_elt_distance <- function(e1, e2, elt_type) {
-    .Call('_vldist_get_vl_elt_distance', PACKAGE = 'vldist', e1, e2, elt_type)
+    .Call('_minVL_get_vl_elt_distance', PACKAGE = 'minVL', e1, e2, elt_type)
 }
 
 #' Get voice-leading ascending distance
@@ -27,7 +27,7 @@ get_vl_elt_distance <- function(e1, e2, elt_type) {
 #' and <e2> are pitches or pitch classes.
 #' Vectorised over <e2>.
 get_vl_ascending_distance <- function(e1, e2, elt_type) {
-    .Call('_vldist_get_vl_ascending_distance', PACKAGE = 'vldist', e1, e2, elt_type)
+    .Call('_minVL_get_vl_ascending_distance', PACKAGE = 'minVL', e1, e2, elt_type)
 }
 
 #' Get voice-leading set distance
@@ -40,16 +40,16 @@ get_vl_ascending_distance <- function(e1, e2, elt_type) {
 #' norm used: currently <norm> can take values
 #' of :euclidean, :taxicab, and :infinity.
 #' @export
-get_vl_set_distance <- function(s1, s2, elt_type, norm) {
-    .Call('_vldist_get_vl_set_distance', PACKAGE = 'vldist', s1, s2, elt_type, norm)
+vl_dist <- function(s1, s2, elt_type, norm) {
+    .Call('_minVL_vl_dist', PACKAGE = 'minVL', s1, s2, elt_type, norm)
 }
 
 order_by <- function(data, by) {
-    .Call('_vldist_order_by', PACKAGE = 'vldist', data, by)
+    .Call('_minVL_order_by', PACKAGE = 'minVL', data, by)
 }
 
 add_dist <- function(prev_dist, new_pair_dist, norm) {
-    .Call('_vldist_add_dist', PACKAGE = 'vldist', prev_dist, new_pair_dist, norm)
+    .Call('_minVL_add_dist', PACKAGE = 'minVL', prev_dist, new_pair_dist, norm)
 }
 
 #' Get minimal voice-leading
@@ -61,9 +61,9 @@ add_dist <- function(prev_dist, new_pair_dist, norm) {
 #' @param norm Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}. Each of these identify different norms.
 #' @return A list of three values: 1) the size of the minimal voice-leading; 2) the start voicing; 3) the end voicing.
 #' @references
-#' \insertRef{Tymoczko2006}{vldist}
+#' \insertRef{Tymoczko2006}{minVL}
 #' @export
-get_minimal_voice_leading <- function(s1, s2, elt_type = "pc", norm = "taxicab") {
-    .Call('_vldist_get_minimal_voice_leading', PACKAGE = 'vldist', s1, s2, elt_type, norm)
+min_vl <- function(s1, s2, elt_type = "pc", norm = "taxicab") {
+    .Call('_minVL_min_vl', PACKAGE = 'minVL', s1, s2, elt_type, norm)
 }
 

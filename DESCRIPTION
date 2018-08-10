@@ -1,8 +1,8 @@
-Package: vldist
-Title: Computing Voice-Leading Distances Between Chords
+Package: minVL
+Title: Computing Minimal Voice Leadings Between Chords
 Version: 0.0.1
 Authors@R: person("Peter", "Harrison", email = "pmc.harrison@gmail.com", role = c("aut", "cre"))
-Description: Computes voice-leading distances between chords using Tymoczko's (2006) algorithm.
+Description: Computes minimal voice-leadings between chords using Tymoczko's (2006) algorithm.
 Depends: R (>= 3.5.1)
 License: MIT
 Encoding: UTF-8

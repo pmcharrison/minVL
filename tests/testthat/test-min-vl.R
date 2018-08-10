@@ -1,4 +1,4 @@
-context("vldist")
+context("minVL")
 suppressWarnings(library(reticulate))
 
 test_that("ascending_distance", {
@@ -65,10 +65,10 @@ test_that("elt_distance", {
   )
 })
 
-test_that("vl_set_distance", {
+test_that("vl_dist", {
   # 1
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(4, 7, 11), c(4, 4, 4),
       "pc", "taxicab"
     ),
@@ -76,7 +76,7 @@ test_that("vl_set_distance", {
   )
   # 2
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(4, 7, 7, 7), c(4, 8, 11, 3),
       "pc", "taxicab"
     ),
@@ -84,7 +84,7 @@ test_that("vl_set_distance", {
   )
   # 3
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(4, 7, 11, 0), c(4, 8, 11, 11),
       "pc", "taxicab"
     ),
@@ -92,7 +92,7 @@ test_that("vl_set_distance", {
   )
   # 4
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(60, 64, 67), c(60, 63, 67),
       "pitch", "taxicab"
     ),
@@ -100,7 +100,7 @@ test_that("vl_set_distance", {
   )
   # 5
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(58, 64, 67), c(60, 63, 67),
       "pitch", "taxicab"
     ),
@@ -108,7 +108,7 @@ test_that("vl_set_distance", {
   )
   # 6
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(60, 64, 67), c(60, 63, 67),
       "pitch", "euclidean"
     ),
@@ -116,7 +116,7 @@ test_that("vl_set_distance", {
   )
   # 7
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(58, 64, 67), c(55, 68, 67),
       "pitch", "euclidean"
     ),
@@ -124,7 +124,7 @@ test_that("vl_set_distance", {
   )
   # 8
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(11, 0, 4), c(2, 0, 8),
       "pc", "euclidean"
     ),
@@ -132,7 +132,7 @@ test_that("vl_set_distance", {
   )
   # 9
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(37, 38, 45), c(47, 40, 42),
       "pitch", "infinity"
     ),
@@ -140,7 +140,7 @@ test_that("vl_set_distance", {
   )
   # 10
   expect_equal(
-    get_vl_set_distance(
+    vl_dist(
       c(11, 0, 4), c(5, 0, 8),
       "pc", "infinity"
     ),
@@ -169,67 +169,67 @@ test_that("order_by", {
   )
 })
 
-test_that("get_minimal_voice_leading", {
+test_that("min_vl", {
   # 1
   expect_equal(
-    get_minimal_voice_leading(c(0, 4, 7), c(0, 3, 7),
-                              "pc", "taxicab")$size,
+    min_vl(c(0, 4, 7), c(0, 3, 7),
+           "pc", "taxicab")$dist,
     1
   )
   # 2
   expect_equal(
-    get_minimal_voice_leading(c(0, 4, 7), c(0, 5, 9),
-                              "pc", "taxicab")$size,
+    min_vl(c(0, 4, 7), c(0, 5, 9),
+           "pc", "taxicab")$dist,
     3
   )
   # 3
   expect_equal(
-    get_minimal_voice_leading(c(0, 4, 7), c(0, 3, 8),
-                              "pc", "euclidean")$size,
+    min_vl(c(0, 4, 7), c(0, 3, 8),
+           "pc", "euclidean")$dist,
     sqrt(2)
   )
   # 4
   expect_equal(
-    get_minimal_voice_leading(c(0, 4, 7), c(0, 3, 9),
-                              "pc", "infinity")$size,
+    min_vl(c(0, 4, 7), c(0, 3, 9),
+           "pc", "infinity")$dist,
     2
   )
   # 5
   expect_equal(
-    get_minimal_voice_leading(c(50, 60, 65), c(48, 62, 67),
-                              "pitch", "taxicab")$size,
+    min_vl(c(50, 60, 65), c(48, 62, 67),
+           "pitch", "taxicab")$dist,
     6
   )
   # 6
   expect_equal(
-    get_minimal_voice_leading(c(40, 60, 65), c(50, 60),
-                              "pitch", "taxicab")$size,
+    min_vl(c(40, 60, 65), c(50, 60),
+           "pitch", "taxicab")$dist,
     15
   )
   # 7
   expect_equal(
-    get_minimal_voice_leading(c(4, 7, 11, 0), c(4, 8, 11, 3),
-                              "pc", "taxicab")$size,
+    min_vl(c(4, 7, 11, 0), c(4, 8, 11, 3),
+           "pc", "taxicab")$dist,
     3
   )
   # 8
   expect_equal(
-    get_minimal_voice_leading(c(0, 4, 7), c(1, 6, 10),
-                              "pc", "taxicab")$size,
+    min_vl(c(0, 4, 7), c(1, 6, 10),
+           "pc", "taxicab")$dist,
     6
   )
   # 9
   expect_equal(
-    get_minimal_voice_leading(c(0, 4, 7, 10), c(1, 3, 7, 10),
-                              "pc", "taxicab")$size,
+    min_vl(c(0, 4, 7, 10), c(1, 3, 7, 10),
+           "pc", "taxicab")$dist,
     2
   )
   # Cache
   # expect_equal(
-  #   get_minimal_voice_leading(c(0, 4, 7, 10), c(1, 3, 7, 10),
+  #   min_vl(c(0, 4, 7, 10), c(1, 3, 7, 10),
   #                             "pc", "taxicab",
   #                             cache = FALSE),
-  #   get_minimal_voice_leading(c(0, 4, 7, 10), c(1, 3, 7, 10),
+  #   min_vl(c(0, 4, 7, 10), c(1, 3, 7, 10),
   #                             "pc", "taxicab",
   #                             cache = TRUE)
   # )
@@ -237,28 +237,28 @@ test_that("get_minimal_voice_leading", {
 
 test_that("compare_with_python_implementation", {
   # Load Tymoczko's Python script
-  py_run_file("vldist.py")
+  py_run_file("min-vl.py")
   # Define a function that uses the Python implementation
   # to compute the minimal voice-leading distance
   # between two pitch-class sets
-  py_get_minimal_voice_leading <- function(s1, s2) {
+  py_min_vl <- function(s1, s2) {
     cmd <- sprintf(
       "res = nonbijective_vl([%s], [%s])",
       paste(s1, collapse = ", "),
       paste(s2, collapse = ", ")
     )
     res <- py_run_string(cmd)$res
-    size <- res[[1]]
+    dist <- res[[1]]
     progression <- res[[2]]
     list(
-      size = size,
+      dist = dist,
       start = sapply(progression, function(x) x[1]),
       end = sapply(progression, function(x) x[2])
     )
   }
 
   # For some combinations of chords Tymoczko's implementation gets stuck
-  # in an infinite loop, e.g. py_get_minimal_voice_leading(c(1, 7, 5, 9, 0), c(7, 10)).
+  # in an infinite loop, e.g. py_min_vl(c(1, 7, 5, 9, 0), c(7, 10)).
   # I have yet to diagnose this problem, but for the combination of seed and n
   # given below we don't run into any of these cases.
   set.seed(1)
@@ -269,22 +269,22 @@ test_that("compare_with_python_implementation", {
   for (i in 1:n) {
     chord_1 <- sample(0:11, size = sample(12, 1), replace = FALSE)
     chord_2 <- sample(0:11, size = sample(12, 1), replace = FALSE)
-    our_implementation <- get_minimal_voice_leading(chord_1, chord_2,
-                                                    elt_type = elt_type, norm = norm)
+    our_implementation <- min_vl(chord_1, chord_2,
+                                 elt_type = elt_type, norm = norm)
     expect_true(all(chord_1 %in% our_implementation$start))
     expect_true(all(chord_2 %in% our_implementation$end))
     expect_true(all(our_implementation$start %in% chord_1))
     expect_true(all(our_implementation$end %in% chord_2))
-    expect_equal(get_vl_set_distance(
+    expect_equal(vl_dist(
       our_implementation$start, our_implementation$end,
       elt_type = elt_type, norm = norm
-    ), our_implementation$size)
-    tymoc_implementation <- py_get_minimal_voice_leading(chord_1, chord_2)
-    if (our_implementation$size != tymoc_implementation$size) {
+    ), our_implementation$dist)
+    tymoc_implementation <- py_min_vl(chord_1, chord_2)
+    if (our_implementation$dist != tymoc_implementation$dist) {
       stop("Failure for chord_1 = c(", paste(chord_1, collapse = ", "),
            "); chord_2 = c(", paste(chord_2, collapse = ", "), ")")
     }
-    expect_equal(our_implementation$size, tymoc_implementation$size)
+    expect_equal(our_implementation$dist, tymoc_implementation$dist)
     # setTxtProgressBar(pb, i)
   }
 })
@@ -301,9 +301,9 @@ test_that("add_dist", {
       s2 <- s2a[seq_len(n - 1)]
       elt_dist <- get_vl_elt_distance(s1a[n], s2a[n], elt_type = elt_type)
       expect_equal(
-        get_vl_set_distance(s1a, s2a, elt_type = elt_type, norm = norm),
+        vl_dist(s1a, s2a, elt_type = elt_type, norm = norm),
         add_dist(
-          prev_dist = get_vl_set_distance(s1, s2, elt_type = elt_type, norm = norm),
+          prev_dist = vl_dist(s1, s2, elt_type = elt_type, norm = norm),
           new_pair_dist = elt_dist,
           norm = norm
         )

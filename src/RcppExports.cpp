@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // mod
 float mod(float x, int base);
-RcppExport SEXP _vldist_mod(SEXP xSEXP, SEXP baseSEXP) {
+RcppExport SEXP _minVL_mod(SEXP xSEXP, SEXP baseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // get_vl_elt_distance
 double get_vl_elt_distance(double e1, double e2, String elt_type);
-RcppExport SEXP _vldist_get_vl_elt_distance(SEXP e1SEXP, SEXP e2SEXP, SEXP elt_typeSEXP) {
+RcppExport SEXP _minVL_get_vl_elt_distance(SEXP e1SEXP, SEXP e2SEXP, SEXP elt_typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // get_vl_ascending_distance
 std::vector<double> get_vl_ascending_distance(double e1, std::vector<double> e2, String elt_type);
-RcppExport SEXP _vldist_get_vl_ascending_distance(SEXP e1SEXP, SEXP e2SEXP, SEXP elt_typeSEXP) {
+RcppExport SEXP _minVL_get_vl_ascending_distance(SEXP e1SEXP, SEXP e2SEXP, SEXP elt_typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -43,9 +43,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_vl_set_distance
-double get_vl_set_distance(std::vector<double> s1, std::vector<double> s2, String elt_type, String norm);
-RcppExport SEXP _vldist_get_vl_set_distance(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+// vl_dist
+double vl_dist(std::vector<double> s1, std::vector<double> s2, String elt_type, String norm);
+RcppExport SEXP _minVL_vl_dist(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -53,13 +53,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<double> >::type s2(s2SEXP);
     Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
     Rcpp::traits::input_parameter< String >::type norm(normSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_vl_set_distance(s1, s2, elt_type, norm));
+    rcpp_result_gen = Rcpp::wrap(vl_dist(s1, s2, elt_type, norm));
     return rcpp_result_gen;
 END_RCPP
 }
 // order_by
 std::vector<double> order_by(std::vector<double>& data, std::vector<double> by);
-RcppExport SEXP _vldist_order_by(SEXP dataSEXP, SEXP bySEXP) {
+RcppExport SEXP _minVL_order_by(SEXP dataSEXP, SEXP bySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -71,7 +71,7 @@ END_RCPP
 }
 // add_dist
 double add_dist(double prev_dist, double new_pair_dist, String norm);
-RcppExport SEXP _vldist_add_dist(SEXP prev_distSEXP, SEXP new_pair_distSEXP, SEXP normSEXP) {
+RcppExport SEXP _minVL_add_dist(SEXP prev_distSEXP, SEXP new_pair_distSEXP, SEXP normSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -82,9 +82,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_minimal_voice_leading
-List get_minimal_voice_leading(NumericVector s1, NumericVector s2, String elt_type, String norm);
-RcppExport SEXP _vldist_get_minimal_voice_leading(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+// min_vl
+List min_vl(NumericVector s1, NumericVector s2, String elt_type, String norm);
+RcppExport SEXP _minVL_min_vl(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -92,23 +92,23 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type s2(s2SEXP);
     Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
     Rcpp::traits::input_parameter< String >::type norm(normSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_minimal_voice_leading(s1, s2, elt_type, norm));
+    rcpp_result_gen = Rcpp::wrap(min_vl(s1, s2, elt_type, norm));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_vldist_mod", (DL_FUNC) &_vldist_mod, 2},
-    {"_vldist_get_vl_elt_distance", (DL_FUNC) &_vldist_get_vl_elt_distance, 3},
-    {"_vldist_get_vl_ascending_distance", (DL_FUNC) &_vldist_get_vl_ascending_distance, 3},
-    {"_vldist_get_vl_set_distance", (DL_FUNC) &_vldist_get_vl_set_distance, 4},
-    {"_vldist_order_by", (DL_FUNC) &_vldist_order_by, 2},
-    {"_vldist_add_dist", (DL_FUNC) &_vldist_add_dist, 3},
-    {"_vldist_get_minimal_voice_leading", (DL_FUNC) &_vldist_get_minimal_voice_leading, 4},
+    {"_minVL_mod", (DL_FUNC) &_minVL_mod, 2},
+    {"_minVL_get_vl_elt_distance", (DL_FUNC) &_minVL_get_vl_elt_distance, 3},
+    {"_minVL_get_vl_ascending_distance", (DL_FUNC) &_minVL_get_vl_ascending_distance, 3},
+    {"_minVL_vl_dist", (DL_FUNC) &_minVL_vl_dist, 4},
+    {"_minVL_order_by", (DL_FUNC) &_minVL_order_by, 2},
+    {"_minVL_add_dist", (DL_FUNC) &_minVL_add_dist, 3},
+    {"_minVL_min_vl", (DL_FUNC) &_minVL_min_vl, 4},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_vldist(DllInfo *dll) {
+RcppExport void R_init_minVL(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

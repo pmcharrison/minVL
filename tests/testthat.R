@@ -1,4 +1,4 @@
 library(testthat)
-library(vldist)
+library(minVL)
 
-test_check("vldist")
+test_check("minVL")
