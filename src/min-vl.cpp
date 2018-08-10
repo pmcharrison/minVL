@@ -7,14 +7,14 @@ float mod(float x, int base) {
   return x - floor(x / base) * base;
 }
 
-//' Get voice-leading element distance
-//'
-//' Computes the voice-leading distance between two
-//' elements <e1> and <e2> given <elt_type>. <elt_type>
-//' can be "pc", in which case the distance
-//' is computed between two pitch classes, or
-//' "pitch", in which cases distance is computed
-//' between two pitches.
+// Get voice-leading element distance
+//
+// Computes the voice-leading distance between two
+// elements <e1> and <e2> given <elt_type>. <elt_type>
+// can be "pc", in which case the distance
+// is computed between two pitch classes, or
+// "pitch", in which cases distance is computed
+// between two pitches.
 // [[Rcpp::export]]
 double get_vl_elt_distance(
     double e1,
@@ -33,15 +33,15 @@ double get_vl_elt_distance(
   }
 }
 
-//' Get voice-leading ascending distance
-//'
-//' Returns the ascending distance from <e1> to <e2>,
-//' after Tymoczko (2006): the smallest nonnegative real
-//' number x such that, if p is a pitch with label e1,
-//' then p + x has label e2. <elt-type> may be either
-//' "pitch" or "pc; it denotes whether <e1>
-//' and <e2> are pitches or pitch classes.
-//' Vectorised over <e2>.
+// Get voice-leading ascending distance
+//
+// Returns the ascending distance from <e1> to <e2>,
+// after Tymoczko (2006): the smallest nonnegative real
+// number x such that, if p is a pitch with label e1,
+// then p + x has label e2. <elt-type> may be either
+// "pitch" or "pc; it denotes whether <e1>
+// and <e2> are pitches or pitch classes.
+// Vectorised over <e2>.
 // [[Rcpp::export]]
 std::vector<double> get_vl_ascending_distance(
     double e1,
@@ -65,12 +65,14 @@ std::vector<double> get_vl_ascending_distance(
 //' Get voice-leading set distance
 //'
 //' Computes the voice-leading distance between two
-//' ordered sets of the same length, <s1> and <s2>,
-//' given <elt-type> (which can either be
-//' :pitch or :pitch-class; see vl-elt-distance for
-//' definition) and <norm>, which determines the
-//' norm used: currently <norm> can take values
-//' of :euclidean, :taxicab, and :infinity.
+//' ordered sets of the same length, after \insertRef{Tymoczko2006}{minVL}.
+//' @param s1 First set (numeric vector)
+//' @param s2 Second set (numeric vector)
+//' @param elt_type Element type; can be "pitch" for MIDI pitches
+//' or "pc" for pitch classes (character scalar)
+//' @param norm Norm to use; can be "euclidean", "taxicab", or "infinity"
+//' (character scalar)
+//' @return Voice-leading distance between the two sets (numeric scalar)
 //' @export
 // [[Rcpp::export]]
 double vl_dist(
@@ -277,7 +279,7 @@ std::vector<std::vector<double> > extract_minimal_vl(
 //' @param s2 The second set to be compared; see \code{s1}.
 //' @param elt_type Can be either \code{pitch} or \code{pc}; determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
 //' @param norm Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}. Each of these identify different norms.
-//' @return A list of three values: 1) the size of the minimal voice-leading; 2) the start voicing; 3) the end voicing.
+//' @return A list of three values: 1) the minimal voice-leading distance; 2) the corresponding start voicing; 3) the corresponding end voicing.
 //' @references
 //' \insertRef{Tymoczko2006}{minVL}
 //' @export

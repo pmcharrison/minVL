@@ -6,12 +6,21 @@
 \usage{
 vl_dist(s1, s2, elt_type, norm)
 }
+\arguments{
+\item{s1}{First set (numeric vector)}
+
+\item{s2}{Second set (numeric vector)}
+
+\item{elt_type}{Element type; can be "pitch" for MIDI pitches
+or "pc" for pitch classes (character scalar)}
+
+\item{norm}{Norm to use; can be "euclidean", "taxicab", or "infinity"
+(character scalar)}
+}
+\value{
+Voice-leading distance between the two sets (numeric scalar)
+}
 \description{
 Computes the voice-leading distance between two
-ordered sets of the same length, <s1> and <s2>,
-given <elt-type> (which can either be
-:pitch or :pitch-class; see vl-elt-distance for
-definition) and <norm>, which determines the
-norm used: currently <norm> can take values
-of :euclidean, :taxicab, and :infinity.
+ordered sets of the same length, after \insertRef{Tymoczko2006}{minVL}.
 }

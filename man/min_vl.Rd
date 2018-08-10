@@ -16,7 +16,7 @@ min_vl(s1, s2, elt_type = "pc", norm = "taxicab")
 \item{norm}{Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}. Each of these identify different norms.}
 }
 \value{
-A list of three values: 1) the size of the minimal voice-leading; 2) the start voicing; 3) the end voicing.
+A list of three values: 1) the minimal voice-leading distance; 2) the corresponding start voicing; 3) the corresponding end voicing.
 }
 \description{
 Computes the minimal voice-leading between two sets of pitches or pitch classes, using the polynomial-time algorithm described in Tymoczko (2006).
