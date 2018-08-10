@@ -1,0 +1,14 @@
+Package: vldist
+Title: Computing Voice-Leading Distances Between Chords
+Version: 0.0.1
+Authors@R: person("Peter", "Harrison", email = "pmc.harrison@gmail.com", role = c("aut", "cre"))
+Description: Computes voice-leading distances between chords using Tymoczko's (2006) algorithm.
+Depends: R (>= 3.5.1)
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Suggests: testthat,reticulate,Rdpack
+RdMacros: Rdpack
+LinkingTo: Rcpp
+Imports: Rcpp
+RoxygenNote: 6.1.0
