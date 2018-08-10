@@ -2,6 +2,7 @@
 
 This is an R package for computing minimal voice leadings between chords,
 after Tymcozko (2006).
+Practically all the package is written in C++ for speed.
 
 ## Installation
 
