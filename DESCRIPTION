@@ -1,6 +1,6 @@
 Package: minVL
 Title: Computing Minimal Voice Leadings Between Chords
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: person("Peter", "Harrison", email = "pmc.harrison@gmail.com", role = c("aut", "cre"))
 Description: Computes minimal voice-leadings between chords using Tymoczko's (2006) algorithm.
 Depends: R (>= 3.5.0)
