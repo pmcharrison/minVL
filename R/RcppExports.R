@@ -25,7 +25,7 @@ get_vl_ascending_distance <- function(e1, e2, elt_type) {
 #' (character scalar)
 #' @return Voice-leading distance between the two sets (numeric scalar)
 #' @export
-vl_dist <- function(s1, s2, elt_type, norm) {
+vl_dist <- function(s1, s2, elt_type = "pc", norm = "taxicab") {
     .Call('_minVL_vl_dist', PACKAGE = 'minVL', s1, s2, elt_type, norm)
 }
 

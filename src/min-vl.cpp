@@ -78,8 +78,8 @@ std::vector<double> get_vl_ascending_distance(
 double vl_dist(
     std::vector<double> s1,
     std::vector<double> s2,
-    String elt_type,
-    String norm
+    String elt_type = "pc",
+    String norm = "taxicab"
 ) {
   int n = s1.size();
   double distances[n];
