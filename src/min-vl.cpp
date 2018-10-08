@@ -419,37 +419,37 @@ double min_vl_dist(
   return(res);
 }
 
-// This didn't speed things up enough to be worth maintaining.
-// //' Get minimal voice-leading set distances
-// //'
-// //' Equivalent to \code{\link{min_vl_dist()}} but vectorised over the first argument.
-// //' @param s1_list List of numeric vectors,
-// //' each corresponding to
-// //' with each number corresponding to either a pitch or a pitch class.
-// //' Duplicates are permitted, and they will be retained.
-// //' Order does not matter.
-// //' @param s2 The second set to be compared; see \code{s1}.
-// //' @param elt_type Can be either \code{pitch} or \code{pc};
-// //' determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
-// //' @param norm Can be either \code{euclidean}, \code{taxicab},
-// //' or \code{infinity}. Each of these identify different norms.
-// //' @export
-// // [[Rcpp::export]]
-// NumericMatrix min_vl_dists(
-//     List s1_list,
-//     List s2_list,
-//     String elt_type = "pc",
-//     String norm = "taxicab"
-// ) {
-//   int n1 = s1_list.size();
-//   int n2 = s2_list.size();
-//   NumericMatrix res(n1, n2);
-//   for (int i = 0; i < n1; i ++) {
-//     for (int j = 0; j < n2; j ++) {
-//       NumericVector s1 = s1_list[i];
-//       NumericVector s2 = s2_list[i];
-//       res(i, j) = min_vl_dist(s1, s2, elt_type, norm);
-//     }
-//   }
-//   return(res);
-// }
+//' Get minimal voice-leading set distances
+//'
+//' Equivalent to \code{\link{min_vl_dist()}} but vectorised.
+//' @param s1_list List of numeric vectors corresponding to the
+//' first pitch-class sets to be compared,
+//' with each number corresponding to either a pitch or a pitch class.
+//' Duplicates are permitted, and they will be retained.
+//' Order does not matter.
+//' @param s2 List of numeric vectors corresponding to the second
+//' pitch-class sets to be compared; see \code{s1}.
+//' @param elt_type Can be either \code{pitch} or \code{pc};
+//' determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
+//' @param norm Can be either \code{euclidean}, \code{taxicab},
+//' or \code{infinity}. Each of these identify different norms.
+//' @export
+// [[Rcpp::export]]
+NumericMatrix min_vl_dists(
+    List s1_list,
+    List s2_list,
+    String elt_type = "pc",
+    String norm = "taxicab"
+) {
+  int n1 = s1_list.size();
+  int n2 = s2_list.size();
+  NumericMatrix res(n1, n2);
+  for (int i = 0; i < n1; i ++) {
+    for (int j = 0; j < n2; j ++) {
+      NumericVector s1 = s1_list[i];
+      NumericVector s2 = s2_list[j];
+      res(i, j) = min_vl_dist(s1, s2, elt_type, norm);
+    }
+  }
+  return(res);
+}

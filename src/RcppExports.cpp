@@ -110,6 +110,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// min_vl_dists
+NumericMatrix min_vl_dists(List s1_list, List s2_list, String elt_type, String norm);
+RcppExport SEXP _minVL_min_vl_dists(SEXP s1_listSEXP, SEXP s2_listSEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type s1_list(s1_listSEXP);
+    Rcpp::traits::input_parameter< List >::type s2_list(s2_listSEXP);
+    Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
+    Rcpp::traits::input_parameter< String >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(min_vl_dists(s1_list, s2_list, elt_type, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_minVL_mod", (DL_FUNC) &_minVL_mod, 2},
@@ -120,6 +134,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_minVL_add_dist", (DL_FUNC) &_minVL_add_dist, 3},
     {"_minVL_min_vl", (DL_FUNC) &_minVL_min_vl, 4},
     {"_minVL_min_vl_dist", (DL_FUNC) &_minVL_min_vl_dist, 4},
+    {"_minVL_min_vl_dists", (DL_FUNC) &_minVL_min_vl_dists, 4},
     {NULL, NULL, 0}
 };
 

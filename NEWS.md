@@ -1,3 +1,4 @@
+* Added min_vl_dists(), a vectorised version of min_vl_dist().
 * Added min_vl_dist() for computing minimal voice-leading distances
 (and forgetting about the actual voice leading).
 * Added input checking for vl_dist(), 

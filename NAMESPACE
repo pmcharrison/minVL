@@ -2,6 +2,7 @@
 
 export(min_vl)
 export(min_vl_dist)
+export(min_vl_dists)
 export(vl_dist)
 importFrom(Rcpp,sourceCpp)
 useDynLib(minVL)
