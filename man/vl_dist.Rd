@@ -4,7 +4,7 @@
 \alias{vl_dist}
 \title{Get voice-leading set distance}
 \usage{
-vl_dist(s1, s2, elt_type, norm)
+vl_dist(s1, s2, elt_type = "pc", norm = "taxicab")
 }
 \arguments{
 \item{s1}{First set (numeric vector)}

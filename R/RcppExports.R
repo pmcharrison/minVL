@@ -52,3 +52,28 @@ min_vl <- function(s1, s2, elt_type = "pc", norm = "taxicab") {
     .Call('_minVL_min_vl', PACKAGE = 'minVL', s1, s2, elt_type, norm)
 }
 
+#' Get minimal voice-leading distance
+#'
+#' Computes the minimal voice-leading distance between two sets of pitches or pitch classes,
+#' using the polynomial-time algorithm described in Tymoczko (2006).
+#' @param s1 The first set to be compared; numeric vector,
+#' with each number corresponding to either a pitch or a pitch class.
+#' Duplicates are permitted, and they will be retained.
+#' Order does not matter.
+#' @param s2 The second set to be compared; see \code{s1}.
+#' @param elt_type Can be either \code{pitch} or \code{pc};
+#' determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
+#' @param norm Can be either \code{euclidean}, \code{taxicab},
+#' or \code{infinity}. Each of these identify different norms.
+#' @return A numeric scalar corresponding to the minimal voice-leading distance.
+#' @note \code{\link{min_vl}()} is equivalent to \code{\link{min_vl_dist}()}
+#' but also returns the voice leading itself.
+#' @note \code{\link{min_vl_dists}()} is equivalent to \code{\link{min_vl_dist}()}
+#' but is vectorised over the first argument.
+#' @references
+#' \insertRef{Tymoczko2006}{minVL}
+#' @export
+min_vl_dist <- function(s1, s2, elt_type = "pc", norm = "taxicab") {
+    .Call('_minVL_min_vl_dist', PACKAGE = 'minVL', s1, s2, elt_type, norm)
+}
+

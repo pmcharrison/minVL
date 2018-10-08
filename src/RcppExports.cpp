@@ -96,6 +96,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// min_vl_dist
+double min_vl_dist(NumericVector s1, NumericVector s2, String elt_type, String norm);
+RcppExport SEXP _minVL_min_vl_dist(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type s1(s1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type s2(s2SEXP);
+    Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
+    Rcpp::traits::input_parameter< String >::type norm(normSEXP);
+    rcpp_result_gen = Rcpp::wrap(min_vl_dist(s1, s2, elt_type, norm));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_minVL_mod", (DL_FUNC) &_minVL_mod, 2},
@@ -105,6 +119,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_minVL_order_by", (DL_FUNC) &_minVL_order_by, 2},
     {"_minVL_add_dist", (DL_FUNC) &_minVL_add_dist, 3},
     {"_minVL_min_vl", (DL_FUNC) &_minVL_min_vl, 4},
+    {"_minVL_min_vl_dist", (DL_FUNC) &_minVL_min_vl_dist, 4},
     {NULL, NULL, 0}
 };
 
