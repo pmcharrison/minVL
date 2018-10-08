@@ -82,6 +82,10 @@ double vl_dist(
     String norm = "taxicab"
 ) {
   int n = s1.size();
+  int m = s2.size();
+  if (n != m) {
+    stop("vl_dist() requires each input set to have the same size");
+  }
   double distances[n];
   for (int i = 0; i < n; i ++) {
     distances[i] = get_vl_elt_distance(
@@ -107,6 +111,33 @@ double vl_dist(
   } else stop("Unrecognised norm");
   return res;
 }
+
+// //' Get voice-leading set distances
+// //'
+// //' Equivalent to \code{\link{vl_dist()}} but vectorised over the first argument.
+// //' @param s1_list First set (numeric vector)
+// //' @param s2 Second set (numeric vector)
+// //' @param elt_type Element type; can be "pitch" for MIDI pitches
+// //' or "pc" for pitch classes (character scalar)
+// //' @param norm Norm to use; can be "euclidean", "taxicab", or "infinity"
+// //' (character scalar)
+// //' @return Voice-leading distance between the two sets (numeric scalar)
+// //' @export
+// // [[Rcpp::export]]
+// std::vector<double> vl_dists(
+//     List s1_list,
+//     std::vector<double> s2,
+//     String elt_type = "pc",
+//     String norm = "taxicab"
+// ) {
+//   int n = s1_list.size();
+//   std::vector<double> res(n);
+//   for (int i = 0; i < n; i ++) {
+//     std::vector<double> s1 = s1_list[i];
+//     res[i] = vl_dist(s1, s2, elt_type, norm);
+//   }
+//   return(res);
+// }
 
 struct MyComparator
 {
