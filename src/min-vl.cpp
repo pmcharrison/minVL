@@ -289,10 +289,10 @@ std::vector<std::vector<double> > extract_minimal_vl(
 //' @export
 // [[Rcpp::export]]
 List min_vl(
-  NumericVector s1,
-  NumericVector s2,
-  String elt_type = "pc",
-  String norm = "taxicab"
+    NumericVector s1,
+    NumericVector s2,
+    String elt_type = "pc",
+    String norm = "taxicab"
 ) {
   // std::vector<double> a = as<std::vector<double> >(s1);
   // std::vector<double> b = as<std::vector<double> >(s2);
@@ -381,7 +381,7 @@ List min_vl(
   List res = List::create(
     best_vl_dist,
     reverse? min_vl[1] : min_vl[0],
-    reverse? min_vl[0] : min_vl[1]
+                               reverse? min_vl[0] : min_vl[1]
   );
   res.names() = CharacterVector::create("dist", "start", "end");
   return res;
@@ -450,6 +450,20 @@ NumericMatrix min_vl_dists(
       NumericVector s2 = s2_list[j];
       res(i, j) = min_vl_dist(s1, s2, elt_type, norm);
     }
+  }
+  return(res);
+}
+
+//' @export
+// [[Rcpp::export]]
+std::vector<List> min_vls (List s1_list,
+                           NumericVector s2,
+                           String elt_type = "pc",
+                           String norm = "taxicab") {
+  int n = s1_list.size();
+  std::vector<List> res(n);
+  for (int i = 0; i < n; i ++) {
+    res[i] = min_vl(s1_list[i], s2, elt_type, norm);
   }
   return(res);
 }

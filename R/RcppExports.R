@@ -96,3 +96,8 @@ min_vl_dists <- function(s1_list, s2_list, elt_type = "pc", norm = "taxicab") {
     .Call('_minVL_min_vl_dists', PACKAGE = 'minVL', s1_list, s2_list, elt_type, norm)
 }
 
+#' @export
+min_vls <- function(s1_list, s2, elt_type = "pc", norm = "taxicab") {
+    .Call('_minVL_min_vls', PACKAGE = 'minVL', s1_list, s2, elt_type, norm)
+}
+
