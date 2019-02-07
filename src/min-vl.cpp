@@ -453,3 +453,17 @@ NumericMatrix min_vl_dists(
   }
   return(res);
 }
+
+//' @export
+// [[Rcpp::export]]
+std::vector<List> min_vls (List s1_list,
+              NumericVector s2,
+              String elt_type = "pc",
+              String norm = "taxicab") {
+  int n = s1_list.size();
+  std::vector<List> res(n);
+  for (int i = 0; i < n; i ++) {
+    res[i] = min_vl(s1_list[i], s2, elt_type, norm);
+  }
+  return(res);
+}
