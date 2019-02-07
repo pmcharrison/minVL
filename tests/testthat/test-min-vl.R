@@ -1,6 +1,13 @@
 context("minVL")
 suppressWarnings(library(reticulate))
 
+test_that("error when providing pitches with elt_type pc", {
+  expect_error(
+    min_vl(c(60, 64, 67), c(52, 56, 58), elt_type = "pc"),
+    "provided values are incompatible with 'elt_type = pc'"
+  )
+})
+
 test_that("ascending_distance", {
   expect_equal(
     get_vl_ascending_distance(60, 70, "pitch"),

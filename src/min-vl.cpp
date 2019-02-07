@@ -294,9 +294,16 @@ List min_vl(
     String elt_type = "pc",
     String norm = "taxicab"
 ) {
-  // std::vector<double> a = as<std::vector<double> >(s1);
-  // std::vector<double> b = as<std::vector<double> >(s2);
-  //
+  if (elt_type == "pc") {
+    bool s1_too_low = is_true(any(s1 < 0));
+    bool s1_too_high = is_true(any(s1 >= 12));
+    bool s2_too_low = is_true(any(s2 < 0));
+    bool s2_too_high = is_true(any(s2 >= 12));
+    if (s1_too_low || s1_too_high || s2_too_low || s2_too_high) {
+      stop("provided values are incompatible with 'elt_type = pc'\n");
+    }
+  }
+
   std::vector<double> a;
   std::vector<double> b;
 
