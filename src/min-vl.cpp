@@ -279,11 +279,33 @@ std::vector<std::vector<double> > extract_minimal_vl(
 //' Get minimal voice-leading
 //'
 //' Computes the minimal voice-leading between two sets of pitches or pitch classes, using the polynomial-time algorithm described in Tymoczko (2006).
-//' @param s1 The first set to be compared; numeric vector, with each number corresponding to either a pitch or a pitch class. Duplicates are permitted, and they will be retained. Order does not matter.
+//'
+//' @param s1 The first set to be compared; numeric vector,
+//' with each number corresponding to either a pitch or a pitch class.
+//' Duplicates are permitted, and they will be retained. Order does not matter.
+//'
 //' @param s2 The second set to be compared; see \code{s1}.
-//' @param elt_type Can be either \code{pitch} or \code{pc}; determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
-//' @param norm Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}. Each of these identify different norms.
-//' @return A list of three values: 1) the minimal voice-leading distance; 2) the corresponding start voicing; 3) the corresponding end voicing.
+//'
+//' @param elt_type
+//' Can be either \code{pitch} or \code{pc};
+//' determines whether \code{s1} and \code{s2} are interpreted as
+//' pitches or pitch classes.
+//'
+//' @param norm
+//' Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}.
+//' Each of these identify different norms.
+//'
+//' @param preserve_bass
+//' Logical scalar;
+//' if TRUE, the first element of each set is considered to be the bass note,
+//' and the voice leading is constrained to preserve these bass notes.
+//' Only relevant if \code{elt_type == "pc"}.
+//'
+//' @return A list of three values:
+//' 1) the minimal voice-leading distance;
+//' 2) the corresponding start voicing;
+//' 3) the corresponding end voicing.
+//'
 //' @references
 //' \insertRef{Tymoczko2006}{minVL}
 //' @export
@@ -292,7 +314,8 @@ List min_vl(
     NumericVector s1,
     NumericVector s2,
     String elt_type = "pc",
-    String norm = "taxicab"
+    String norm = "taxicab",
+    bool preserve_bass = false
 ) {
   if (elt_type == "pc") {
     bool s1_too_low = is_true(any(s1 < 0));
@@ -302,6 +325,10 @@ List min_vl(
     if (s1_too_low || s1_too_high || s2_too_low || s2_too_high) {
       stop("provided values are incompatible with 'elt_type = pc'\n");
     }
+  }
+
+  if (s1.size() == 0 || s2.size() == 0) {
+    stop("cannot compute voice leadings for empty sets");
   }
 
   std::vector<double> a;
@@ -344,7 +371,11 @@ List min_vl(
     double b_min = *std::min_element(b.begin(), b.end());
     b_0_candidates.push_back(b_min);
   } else if (elt_type == "pc") {
-    b_0_candidates = b;
+    if (preserve_bass) {
+      b_0_candidates.push_back(b.at(0));
+    } else {
+      b_0_candidates = b;
+    }
   } else {
     stop("Unrecognised <elt-type>.");
   }
@@ -398,20 +429,34 @@ List min_vl(
 //'
 //' Computes the minimal voice-leading distance between two sets of pitches or pitch classes,
 //' using the polynomial-time algorithm described in Tymoczko (2006).
+//'
 //' @param s1 The first set to be compared; numeric vector,
 //' with each number corresponding to either a pitch or a pitch class.
 //' Duplicates are permitted, and they will be retained.
 //' Order does not matter.
+//'
 //' @param s2 The second set to be compared; see \code{s1}.
+//'
 //' @param elt_type Can be either \code{pitch} or \code{pc};
-//' determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
+//' determines whether \code{s1} and \code{s2} are interpreted
+//' as pitches or pitch classes.
+//'
 //' @param norm Can be either \code{euclidean}, \code{taxicab},
 //' or \code{infinity}. Each of these identify different norms.
+//'
+//' @param preserve_bass
+//' Logical scalar;
+//' if TRUE, the first element of each set is considered to be the bass note,
+//' and the voice leading is constrained to preserve these bass notes.
+//' Only relevant if \code{elt_type == "pc"}.
+//'
 //' @return A numeric scalar corresponding to the minimal voice-leading distance.
+//'
 //' @note \code{\link{min_vl}()} is equivalent to \code{\link{min_vl_dist}()}
 //' but also returns the voice leading itself.
 //' @note \code{\link{min_vl_dists}()} is equivalent to \code{\link{min_vl_dist}()}
 //' but is vectorised over the first argument.
+//'
 //' @references
 //' \insertRef{Tymoczko2006}{minVL}
 //' @export
@@ -420,8 +465,9 @@ double min_vl_dist(
     NumericVector s1,
     NumericVector s2,
     String elt_type = "pc",
-    String norm = "taxicab") {
-  List vl = min_vl(s1, s2, elt_type, norm);
+    String norm = "taxicab",
+    bool preserve_bass = false) {
+  List vl = min_vl(s1, s2, elt_type, norm, preserve_bass);
   double res = vl["dist"];
   return(res);
 }
@@ -429,24 +475,37 @@ double min_vl_dist(
 //' Get minimal voice-leading set distances
 //'
 //' Equivalent to \code{\link{min_vl_dist()}} but vectorised.
+//'
 //' @param s1_list List of numeric vectors corresponding to the
 //' first pitch-class sets to be compared,
 //' with each number corresponding to either a pitch or a pitch class.
 //' Duplicates are permitted, and they will be retained.
 //' Order does not matter.
+//'
 //' @param s2 List of numeric vectors corresponding to the second
 //' pitch-class sets to be compared; see \code{s1}.
+//'
 //' @param elt_type Can be either \code{pitch} or \code{pc};
-//' determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.
+//' determines whether \code{s1} and \code{s2} are interpreted
+//' as pitches or pitch classes.
+//'
 //' @param norm Can be either \code{euclidean}, \code{taxicab},
 //' or \code{infinity}. Each of these identify different norms.
+//'
+//' @param preserve_bass
+//' Logical scalar;
+//' if TRUE, the first element of each set is considered to be the bass note,
+//' and the voice leading is constrained to preserve these bass notes.
+//' Only relevant if \code{elt_type == "pc"}.
+//'
 //' @export
 // [[Rcpp::export]]
 NumericMatrix min_vl_dists(
     List s1_list,
     List s2_list,
     String elt_type = "pc",
-    String norm = "taxicab"
+    String norm = "taxicab",
+    bool preserve_bass = false
 ) {
   int n1 = s1_list.size();
   int n2 = s2_list.size();
@@ -455,7 +514,7 @@ NumericMatrix min_vl_dists(
     for (int j = 0; j < n2; j ++) {
       NumericVector s1 = s1_list[i];
       NumericVector s2 = s2_list[j];
-      res(i, j) = min_vl_dist(s1, s2, elt_type, norm);
+      res(i, j) = min_vl_dist(s1, s2, elt_type, norm, preserve_bass);
     }
   }
   return(res);
@@ -466,11 +525,12 @@ NumericMatrix min_vl_dists(
 std::vector<List> min_vls (List s1_list,
                            NumericVector s2,
                            String elt_type = "pc",
-                           String norm = "taxicab") {
+                           String norm = "taxicab",
+                           bool preserve_bass = false) {
   int n = s1_list.size();
   std::vector<List> res(n);
   for (int i = 0; i < n; i ++) {
-    res[i] = min_vl(s1_list[i], s2, elt_type, norm);
+    res[i] = min_vl(s1_list[i], s2, elt_type, norm, preserve_bass);
   }
   return(res);
 }
