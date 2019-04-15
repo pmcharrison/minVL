@@ -1,3 +1,5 @@
+# minVL 0.3.0
+
 * Fixed #2.
 * Fixed #3.
 * Added `preserve_bass` option.
