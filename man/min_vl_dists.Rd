@@ -14,6 +14,9 @@ with each number corresponding to either a pitch or a pitch class.
 Duplicates are permitted, and they will be retained.
 Order does not matter.}
 
+\item{s2_list}{List of numeric vectors corresponding to the second
+pitch-class sets to be compared; see \code{s1}.}
+
 \item{elt_type}{Can be either \code{pitch} or \code{pc};
 determines whether \code{s1} and \code{s2} are interpreted
 as pitches or pitch classes.}
@@ -25,10 +28,7 @@ or \code{infinity}. Each of these identify different norms.}
 if TRUE, the first element of each set is considered to be the bass note,
 and the voice leading is constrained to preserve these bass notes.
 Only relevant if \code{elt_type == "pc"}.}
-
-\item{s2}{List of numeric vectors corresponding to the second
-pitch-class sets to be compared; see \code{s1}.}
 }
 \description{
-Equivalent to \code{\link{min_vl_dist()}} but vectorised.
+Equivalent to \code{\link{min_vl_dist}} but vectorised.
 }

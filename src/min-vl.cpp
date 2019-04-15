@@ -474,7 +474,7 @@ double min_vl_dist(
 
 //' Get minimal voice-leading set distances
 //'
-//' Equivalent to \code{\link{min_vl_dist()}} but vectorised.
+//' Equivalent to \code{\link{min_vl_dist}} but vectorised.
 //'
 //' @param s1_list List of numeric vectors corresponding to the
 //' first pitch-class sets to be compared,
@@ -482,7 +482,7 @@ double min_vl_dist(
 //' Duplicates are permitted, and they will be retained.
 //' Order does not matter.
 //'
-//' @param s2 List of numeric vectors corresponding to the second
+//' @param s2_list List of numeric vectors corresponding to the second
 //' pitch-class sets to be compared; see \code{s1}.
 //'
 //' @param elt_type Can be either \code{pitch} or \code{pc};
@@ -520,6 +520,39 @@ NumericMatrix min_vl_dists(
   return(res);
 }
 
+//' Minimum voice leadings
+//'
+//' This is a vectorised version of \code{\link{min_vl}}.
+//'
+//' @param s1_list
+//' A list of voice leadings to be analysed.
+//' Each element should be a numeric vector,
+//' with each number corresponding to either a pitch or a pitch class.
+//' Duplicates are permitted, and they will be retained. Order does not matter.
+//'
+//' @param s2
+//' A voice leading to be analysed, represented as a numeric vector.
+//'
+//' @param elt_type
+//' Can be either \code{pitch} or \code{pc};
+//' determines whether \code{s1} and \code{s2} are interpreted as
+//' pitches or pitch classes.
+//'
+//' @param norm
+//' Can be either \code{euclidean}, \code{taxicab}, or \code{infinity}.
+//' Each of these identify different norms.
+//'
+//' @param preserve_bass
+//' Logical scalar;
+//' if TRUE, the first element of each set is considered to be the bass note,
+//' and the voice leading is constrained to preserve these bass notes.
+//' Only relevant if \code{elt_type == "pc"}.
+//'
+//' @return
+//' An integer vector of the same length as \code{s1_list},
+//' where element i corresponds to the minimal voice leading between
+//' the ith element of \code{s1_list} and \code{s2}.
+//'
 //' @export
 // [[Rcpp::export]]
 std::vector<List> min_vls (List s1_list,
