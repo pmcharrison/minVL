@@ -4,7 +4,8 @@
 \alias{min_vl_dist}
 \title{Get minimal voice-leading distance}
 \usage{
-min_vl_dist(s1, s2, elt_type = "pc", norm = "taxicab")
+min_vl_dist(s1, s2, elt_type = "pc", norm = "taxicab",
+  preserve_bass = FALSE)
 }
 \arguments{
 \item{s1}{The first set to be compared; numeric vector,
@@ -15,10 +16,16 @@ Order does not matter.}
 \item{s2}{The second set to be compared; see \code{s1}.}
 
 \item{elt_type}{Can be either \code{pitch} or \code{pc};
-determines whether \code{s1} and \code{s2} are interpreted as pitches or pitch classes.}
+determines whether \code{s1} and \code{s2} are interpreted
+as pitches or pitch classes.}
 
 \item{norm}{Can be either \code{euclidean}, \code{taxicab},
 or \code{infinity}. Each of these identify different norms.}
+
+\item{preserve_bass}{Logical scalar;
+if TRUE, the first element of each set is considered to be the bass note,
+and the voice leading is constrained to preserve these bass notes.
+Only relevant if \code{elt_type == "pc"}.}
 }
 \value{
 A numeric scalar corresponding to the minimal voice-leading distance.

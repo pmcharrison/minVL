@@ -1,3 +1,9 @@
+# minVL 0.3.0
+
+* Fixed #2.
+* Fixed #3.
+* Added `preserve_bass` option.
+
 # minVL 0.2.0
 
 * Added min_vl_dists(), a vectorised version of min_vl_dist().

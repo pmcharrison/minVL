@@ -83,8 +83,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // min_vl
-List min_vl(NumericVector s1, NumericVector s2, String elt_type, String norm);
-RcppExport SEXP _minVL_min_vl(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+List min_vl(NumericVector s1, NumericVector s2, String elt_type, String norm, bool preserve_bass);
+RcppExport SEXP _minVL_min_vl(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP, SEXP preserve_bassSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -92,13 +92,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type s2(s2SEXP);
     Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
     Rcpp::traits::input_parameter< String >::type norm(normSEXP);
-    rcpp_result_gen = Rcpp::wrap(min_vl(s1, s2, elt_type, norm));
+    Rcpp::traits::input_parameter< bool >::type preserve_bass(preserve_bassSEXP);
+    rcpp_result_gen = Rcpp::wrap(min_vl(s1, s2, elt_type, norm, preserve_bass));
     return rcpp_result_gen;
 END_RCPP
 }
 // min_vl_dist
-double min_vl_dist(NumericVector s1, NumericVector s2, String elt_type, String norm);
-RcppExport SEXP _minVL_min_vl_dist(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+double min_vl_dist(NumericVector s1, NumericVector s2, String elt_type, String norm, bool preserve_bass);
+RcppExport SEXP _minVL_min_vl_dist(SEXP s1SEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP, SEXP preserve_bassSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -106,13 +107,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type s2(s2SEXP);
     Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
     Rcpp::traits::input_parameter< String >::type norm(normSEXP);
-    rcpp_result_gen = Rcpp::wrap(min_vl_dist(s1, s2, elt_type, norm));
+    Rcpp::traits::input_parameter< bool >::type preserve_bass(preserve_bassSEXP);
+    rcpp_result_gen = Rcpp::wrap(min_vl_dist(s1, s2, elt_type, norm, preserve_bass));
     return rcpp_result_gen;
 END_RCPP
 }
 // min_vl_dists
-NumericMatrix min_vl_dists(List s1_list, List s2_list, String elt_type, String norm);
-RcppExport SEXP _minVL_min_vl_dists(SEXP s1_listSEXP, SEXP s2_listSEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+NumericMatrix min_vl_dists(List s1_list, List s2_list, String elt_type, String norm, bool preserve_bass);
+RcppExport SEXP _minVL_min_vl_dists(SEXP s1_listSEXP, SEXP s2_listSEXP, SEXP elt_typeSEXP, SEXP normSEXP, SEXP preserve_bassSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -120,13 +122,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< List >::type s2_list(s2_listSEXP);
     Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
     Rcpp::traits::input_parameter< String >::type norm(normSEXP);
-    rcpp_result_gen = Rcpp::wrap(min_vl_dists(s1_list, s2_list, elt_type, norm));
+    Rcpp::traits::input_parameter< bool >::type preserve_bass(preserve_bassSEXP);
+    rcpp_result_gen = Rcpp::wrap(min_vl_dists(s1_list, s2_list, elt_type, norm, preserve_bass));
     return rcpp_result_gen;
 END_RCPP
 }
 // min_vls
-std::vector<List> min_vls(List s1_list, NumericVector s2, String elt_type, String norm);
-RcppExport SEXP _minVL_min_vls(SEXP s1_listSEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP) {
+std::vector<List> min_vls(List s1_list, NumericVector s2, String elt_type, String norm, bool preserve_bass);
+RcppExport SEXP _minVL_min_vls(SEXP s1_listSEXP, SEXP s2SEXP, SEXP elt_typeSEXP, SEXP normSEXP, SEXP preserve_bassSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -134,7 +137,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type s2(s2SEXP);
     Rcpp::traits::input_parameter< String >::type elt_type(elt_typeSEXP);
     Rcpp::traits::input_parameter< String >::type norm(normSEXP);
-    rcpp_result_gen = Rcpp::wrap(min_vls(s1_list, s2, elt_type, norm));
+    Rcpp::traits::input_parameter< bool >::type preserve_bass(preserve_bassSEXP);
+    rcpp_result_gen = Rcpp::wrap(min_vls(s1_list, s2, elt_type, norm, preserve_bass));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -146,10 +150,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_minVL_vl_dist", (DL_FUNC) &_minVL_vl_dist, 4},
     {"_minVL_order_by", (DL_FUNC) &_minVL_order_by, 2},
     {"_minVL_add_dist", (DL_FUNC) &_minVL_add_dist, 3},
-    {"_minVL_min_vl", (DL_FUNC) &_minVL_min_vl, 4},
-    {"_minVL_min_vl_dist", (DL_FUNC) &_minVL_min_vl_dist, 4},
-    {"_minVL_min_vl_dists", (DL_FUNC) &_minVL_min_vl_dists, 4},
-    {"_minVL_min_vls", (DL_FUNC) &_minVL_min_vls, 4},
+    {"_minVL_min_vl", (DL_FUNC) &_minVL_min_vl, 5},
+    {"_minVL_min_vl_dist", (DL_FUNC) &_minVL_min_vl_dist, 5},
+    {"_minVL_min_vl_dists", (DL_FUNC) &_minVL_min_vl_dists, 5},
+    {"_minVL_min_vls", (DL_FUNC) &_minVL_min_vls, 5},
     {NULL, NULL, 0}
 };
 
