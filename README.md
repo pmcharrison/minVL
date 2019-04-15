@@ -1,5 +1,10 @@
 # minVL - computing minimal voice leadings
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis build status](https://travis-ci.org/pmcharrison/minVL.svg?branch=master)](https://travis-ci.org/pmcharrison/minVL)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/pmcharrison/minVL?branch=master&svg=true)](https://ci.appveyor.com/project/pmcharrison/minVL)
+[![Coverage status](https://coveralls.io/repos/github/pmcharrison/minVL/badge.svg)](https://coveralls.io/r/pmcharrison/minVL?branch=master)
+
 This is an R package for computing minimal voice leadings between chords,
 after Tymcozko (2006).
 The package is written in C++ for speed.

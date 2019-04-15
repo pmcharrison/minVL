@@ -10,7 +10,8 @@ LazyData: true
 Suggests: 
     testthat (>= 2.0.0),
     reticulate (>= 1.10),
-    Rdpack (>= 0.9.0)
+    Rdpack (>= 0.9.0),
+    covr
 RdMacros: Rdpack
 LinkingTo: 
     Rcpp (>= 0.12.18)
